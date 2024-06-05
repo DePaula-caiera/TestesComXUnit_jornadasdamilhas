@@ -35,7 +35,7 @@ public class OfertaViagem: Valida
             Erros.RegistrarErro(Periodo.Erros.Sumario);
         } else if (Rota == null || Periodo == null)
         {
-            Erros.RegistrarErro("A oferta de viagem não possui rota ou período válidos.");
+            Erros.RegistrarErro("A oferta de viagem não possui rota ou período válido.");
         } 
         else if (Preco <= 0)
         {
