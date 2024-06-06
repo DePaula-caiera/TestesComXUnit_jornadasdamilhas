@@ -43,7 +43,7 @@ namespace JornadaMilhas.Test
 
             OfertaViagem oferta = new OfertaViagem(rota, periodo, preco);
 
-            Assert.Contains("ERRO: Data de ida não pode ser maior que a data de volta.", oferta.Erros.Sumario);
+            Assert.Contains("Data de ida não pode ser maior que a data de volta.", oferta.Erros.Sumario);
             Assert.False(periodo.EhValido);
         }
     }
