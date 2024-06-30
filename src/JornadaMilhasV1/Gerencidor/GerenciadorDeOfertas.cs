@@ -62,8 +62,10 @@ public class GerenciadorDeOfertas
             return true;
         }
         return false;
-
     }
+
+    public OfertaViagem? RecuperaMaiorDesconto(Func<OfertaViagem, bool>
+        filtro) => ofertaViagem.FirstOrDefault();
 
 
     public void CarregarOfertas()
