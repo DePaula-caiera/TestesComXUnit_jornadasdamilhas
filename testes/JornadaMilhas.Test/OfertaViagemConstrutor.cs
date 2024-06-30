@@ -1,4 +1,5 @@
 using JornadaMilhasV1.Modelos;
+using Microsoft.Identity.Client;
 
 namespace JornadaMilhas.Test
 {
@@ -53,16 +54,33 @@ namespace JornadaMilhas.Test
         [Fact]
         public void RetornaMensagemDeErroDePrecoInvalidoQuandoPrecoMenorQueZero()
         {
-            //Arrange
+            //arrange
             Rota rota = new Rota("OrigemTeste", "DestinoTeste");
             Periodo periodo = new Periodo(new DateTime(2024, 06, 01), new DateTime(2024, 06, 21));
             double preco = -50;
 
-            //Act
+            //act
             JornadaMilhasV1.Modelos.OfertaViagem oferta = new JornadaMilhasV1.Modelos.OfertaViagem(rota, periodo, preco);
 
-            //Assert
-            Assert.Contains("O preço da oferta de viagem deve ser maior que zero.", oferta.Erros.Sumario);
+            //assert
+            Assert.Contains("O preço da oferta de viagem deve ser maior que zero.", oferta.Erros.Sumario);            
+        }
+
+        [Fact]
+        public void RetornaTresErrosDeValidacaoQuandoRotaPeriodoEPrecoSaoInvalidos()
+        {
+            //arrange
+            int quantidadeEsperada = 3;
+            Rota rota = null;
+            Periodo periodo = new Periodo(new DateTime(2024, 6, 1), new DateTime(2024, 5, 10));
+            double preco = -100;
+
+            //act
+            OfertaViagem oferta = new OfertaViagem(rota, periodo, preco);
+
+            //assert
+            Assert.Equal(quantidadeEsperada, oferta.Erros.Count());
+
         }
     }
 }
