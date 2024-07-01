@@ -17,7 +17,7 @@ namespace JornadaMilhas.Test
             //arrange
             var lista = new List<OfertaViagem>();
             var gerenciador = new GerenciadorDeOfertas(lista);
-            Func<OfertaViagem, bool> filtro = o => o.Rota.Destino.Equals("Maceió");
+            Func<OfertaViagem, bool> filtro = o => o.Rota.Destino.Equals("São Paulo");
 
             //act
             var oferta = gerenciador.RecuperaMaiorDesconto(filtro);
@@ -28,7 +28,7 @@ namespace JornadaMilhas.Test
 
         [Fact]
         //destino = Maceió, desconto = 40, preco = 80
-        public void RetornaOfertaEspecificaQUandoDestinoMaceioEDesconto40()
+        public void RetornaOfertaEspecificaQUandoDestinoSaoPauloEDesconto40()
         {
             //arrange
             var fakerPeriodo = new Faker<Periodo>()
@@ -38,7 +38,7 @@ namespace JornadaMilhas.Test
                     return new Periodo(dataInicio, dataInicio.AddDays(30));
                 });
 
-            var rota = new Rota("Curitiba", "Maceió");
+            var rota = new Rota("Curitiba", "São Paulo");
 
             var fakerOferta = new Faker<OfertaViagem>()
                 .CustomInstantiator(f => new OfertaViagem (
@@ -53,11 +53,17 @@ namespace JornadaMilhas.Test
             {
                 Desconto = 40,
                 Ativa = true
+            };
 
+            var ofertaInativa = new OfertaViagem(rota, fakerPeriodo.Generate(), 70)
+            {
+                Desconto = 40,
+                Ativa = false
             };
 
             var lista = fakerOferta.Generate(200);
             lista.Add(ofertaEscolhida);
+            lista.Add(ofertaInativa);
             var gerenciador = new GerenciadorDeOfertas(lista);
             Func<OfertaViagem, bool> filtro = o => o.Rota.Destino.Equals("São Paulo");
             var precoEsperado = 40;

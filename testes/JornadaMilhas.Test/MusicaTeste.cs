@@ -1,4 +1,5 @@
-﻿using JornadaMilhas.Modelos;
+﻿using Bogus;
+using JornadaMilhas.Modelos;
 
 namespace JornadaMilhas.Test
 {
@@ -46,6 +47,6 @@ namespace JornadaMilhas.Test
 
             // Assert
             Assert.Equal(toStringEsperado, resultado);
-        }
+        }        
     }
 }

@@ -16,6 +16,7 @@ namespace JornadaMilhas.Modelos
         public string Nome { get; set; }
         public int Id { get; set; }
         public string Artista { get; set; }
+        public string Album { get; set; }
 
         public void ExibirFichaTecnica()
         {

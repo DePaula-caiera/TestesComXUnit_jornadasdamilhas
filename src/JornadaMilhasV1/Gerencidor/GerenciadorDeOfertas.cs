@@ -19,10 +19,10 @@ public class GerenciadorDeOfertas
     {
         Console.WriteLine("-- Cadastro de ofertas --");
         Console.WriteLine("Informe a cidade de origem: ");
-        string origem = Console.ReadLine();
+        string? origem = Console.ReadLine();
 
         Console.WriteLine("Informe a cidade de destino: ");
-        string destino = Console.ReadLine();
+        string? destino = Console.ReadLine();
 
         Console.WriteLine("Informe a data de ida (DD/MM/AAAA): ");
         DateTime dataIda;
@@ -65,7 +65,11 @@ public class GerenciadorDeOfertas
     }
 
     public OfertaViagem? RecuperaMaiorDesconto(Func<OfertaViagem, bool>
-        filtro) => ofertaViagem.FirstOrDefault();
+        filtro) => ofertaViagem
+        .Where(filtro)
+        .Where(o => o.Ativa)
+        .OrderBy(o => o.Preco)
+        .FirstOrDefault();
 
 
     public void CarregarOfertas()
